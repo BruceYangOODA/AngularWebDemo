@@ -1,0 +1,17 @@
+<h2 mat-dialog-tilte>註冊帳號</h2>
+<mat-dialog-content>
+    <mat-form-field floatLabel="never" hideRequiredMarker apperance="outline">
+        <mat-label>帳號</mat-label>
+        <input matInput required #account="ngModel" [(ngModel)]="userModel.name" name="userName"
+        />
+      </mat-form-field>      
+      <mat-label>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</mat-label>
+      <mat-form-field floatLabel="never" hideRequiredMarker apperance="outline">
+          <mat-label>密碼</mat-label>
+          <input matInput required #pw="ngModel" [(ngModel)]="userModel.password" name="password" type="password"/>          
+        </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-dialog-close [mat-dialog-close]="userModel">註冊</button>
+    <button mat-dialog-close [mat-dialog-close]="null">返回</button>
+</mat-dialog-actions>

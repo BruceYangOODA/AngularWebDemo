@@ -1,0 +1,8 @@
+<video #local_video [autoplay]="true" [muted]="true"></video>
+
+<div class="video" *ngFor="let item of [1,1,1,1]">
+    <video controls (click)="toggleVideo($event)" #videoPlayer width="300" height="300">
+        <source [src]="'/assets/test.mp4'" type="video/mp4" />
+        Browser not supported
+    </video>
+</div>

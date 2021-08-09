@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-9">
+            <div class="row">
+                <mat-select [(value)]="screen_id_select">
+                    <mat-option>NONE</mat-option>
+                    <ng-container *ngFor="let user of room.users">
+                        <mat-option [value]="user.id">{{user.name}}</mat-option>
+                    </ng-container>
+                </mat-select>
+                <button mat-button (click)="screenChange()">切換視頻</button>
+            </div>
+            <div class="row">
+                <video #screen_video id="screen_video" [muted]="false" width="100%"></video>
+            </div>
+        </div>
+        <div class="col-3" id='videoList'>            
+            <video #local_video id="local_video" [muted]="true" width="100%"></video>
+            <div #videoList id='videoList'>
+            </div>
+            <ng-container *ngFor="let user of room.users">
+                <mat-label>{{user.name}}</mat-label>
+                <button mat-btn (click)="muteBtnClick(user.id)">{{getMuteStatus(user.id)?'靜音':'聆聽'}}</button>
+                <video [id]="user.id" [muted]="true" width="100%">                    
+                </video>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!--button mat-btn (click)="test()">test</!--button-->

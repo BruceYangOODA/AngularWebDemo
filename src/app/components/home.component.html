@@ -1,0 +1,89 @@
+<div class="container">
+  <form #userForm="ngForm">
+    <mat-form-field floatLabel="never" hideRequiredMarker apperance="outline">
+      <mat-label>帳號</mat-label>
+      <input matInput required #account="ngModel" [(ngModel)]="userModel.name" name="userName" [disabled]="isLogin" />
+      <mat-hint align="end" *ngIf="account.dirty && validName()">請輸入帳號</mat-hint>
+    </mat-form-field>
+
+    <mat-label>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</mat-label>
+    <mat-form-field floatLabel="never" hideRequiredMarker apperance="outline">
+      <mat-label>密碼</mat-label>
+      <input matInput required #pw="ngModel" [(ngModel)]="userModel.password" name="password" [disabled]="isLogin" type="password"/>
+      <mat-hint align="end" *ngIf="pw.dirty && validPw()">請輸入密碼</mat-hint>
+    </mat-form-field>
+
+    <button #btnLogin color="primary" mat-stroke-button disableRipple
+      (click)="loginUser()">{{isLogin?'登出':'登入'}}</button>
+
+    <button color="primary" mat-stroke-button disableRipple (click)="openRegistDialog()">註冊</button>
+  </form>
+</div>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>視訊會議廳</mat-panel-title>
+      <!--mat-panel-description></mat-panel-description-->
+    </mat-expansion-panel-header>
+    <div *ngIf="roomList.length==0">目前沒有任何視訊</div>
+
+    <div class="content">
+      <div fxLayout="row wrap">
+        <div fxFlex="25%" *ngFor="let room of roomList">
+          <mat-card>
+            <mat-card-title>{{room.name}}
+            </mat-card-title>
+            <mat-card-content>
+              <mat-label>視訊成員: </mat-label>
+              <ng-container *ngFor="let user of room.users">
+                <div>{{user.name}}</div>
+              </ng-container>
+              
+              
+            </mat-card-content>
+            <mat-card-actions align="end"> <button (click)="joinRoomBtnClick(room)"> 連接 </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <mat-action-row></mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>操作功能</mat-panel-title>
+      <!--mat-panel-description></mat-panel-description-->
+    </mat-expansion-panel-header>    
+
+    <div class="content">
+      <div fxLayout="row wrap">
+        <div fxFlex="25%">
+          <mat-card>
+            <mat-card-title>新建
+            </mat-card-title>
+            <mat-card-content>
+              <mat-form-field floatLabel="never" hideRequiredMarker apperance="outline">
+                <mat-label>會議名稱</mat-label>
+              <input matInput type="text" #room="ngModel" [(ngModel)]="roomName" name="room"/>
+            </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions align="end"> <button (click)="createNewRoom()"> 創建 </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <mat-action-row></mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+<!--button (click)="test($event)">TEST</!--button--> 
+
+
